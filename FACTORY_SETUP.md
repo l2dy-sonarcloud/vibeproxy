@@ -245,6 +245,21 @@ Edit your Factory configuration file at `~/.factory/config.json` (if the file do
       "base_url": "http://localhost:8317/v1",
       "api_key": "dummy-not-used",
       "provider": "openai"
+    },
+
+    {
+      "model_display_name": "Qwen3 Coder Plus",
+      "model": "qwen3-coder-plus",
+      "base_url": "http://localhost:8317/v1",
+      "api_key": "dummy-not-used",
+      "provider": "openai"
+    },
+    {
+      "model_display_name": "Qwen3 Coder Flash",
+      "model": "qwen3-coder-flash",
+      "base_url": "http://localhost:8317/v1",
+      "api_key": "dummy-not-used",
+      "provider": "openai"
     }
   ]
 }
@@ -290,6 +305,10 @@ Edit your Factory configuration file at `~/.factory/config.json` (if the file do
 > **Gemini 3 Pro Preview Status**: Google's newest model (`gemini-3-pro-preview`, released Nov 18, 2025) requires the **Vertex AI API** instead of the standard Generative Language API. While the model is included in the config above, **it is not yet supported in CLIProxyAPI 6.5.1** and will return errors if used. Support is expected in an upcoming CLIProxyAPI release—likely within days.
 >
 > **Get ready**: Enable the [Vertex AI API](https://console.cloud.google.com/apis/library/aiplatform.googleapis.com) in your Google Cloud project now. Once CLIProxyAPI adds support, you'll be able to use Gemini 3 Pro Preview immediately through your existing Gemini OAuth connection.
+
+### Qwen Models
+- `qwen3-coder-plus` - Qwen3 Coder Plus (Most capable coding model)
+- `qwen3-coder-flash` - Qwen3 Coder Flash (Fast coding assistant)
 
 ### OpenAI Models
 - `gpt-5` - Standard GPT-5
