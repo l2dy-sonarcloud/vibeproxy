@@ -15,28 +15,30 @@
 
 Built on [CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI), it handles OAuth authentication, token management, and API routing automatically. One click to authenticate, zero friction to code.
 
-> [!IMPORTANT]
-> **NEW: Gemini and Qwen Support! 🎉** VibeProxy now supports Google's Gemini AI and Qwen AI with full OAuth authentication. Connect your accounts and use Gemini and Qwen with your favorite AI coding tools!
->
-> **Note on Gemini 3 Pro Preview**: Google's newest model (released Nov 18, 2025) requires the Vertex AI API and is not yet supported in CLIProxyAPI 6.5.1. Support is expected any day now. To prepare, enable the [Vertex AI API](https://console.cloud.google.com/apis/library/aiplatform.googleapis.com) in your Google Cloud project.
+> [!Warning]
+> ⚠️ **NOTE ON GEMINI 3 PRO**: Google's newest model (released Nov 18, 2025) requires the Vertex AI API and is not yet supported in CLIProxyAPI 6.5.1. Support is expected any day now. To prepare, enable the [Vertex AI API](https://console.cloud.google.com/apis/library/aiplatform.googleapis.com) in your Google Cloud project.
 
-> [!IMPORTANT]
-> **NEW: Extended Thinking Support! 🧠** VibeProxy now supports Claude's extended thinking feature with dynamic budgets (4K, 10K, 32K tokens). Use model names like `claude-sonnet-4-5-20250929-thinking-10000` to enable extended thinking. See the [Factory Setup Guide](FACTORY_SETUP.md#step-3-configure-factory-cli) for details.
-
-> [!IMPORTANT]
-> **NEW: Auto-Updates! 🔄** VibeProxy now automatically checks for and downloads the latest CLIProxyAPI binary updates in the background. You'll always have support for the newest models without lifting a finger.
-
-> [!IMPORTANT]
-> **NEW: GPT-5.1 & GPT-5.1 Codex Support! ⚡️** Drop the brand-new `gpt-5.1*` and `gpt-5.1-codex*` models into your Factory CLI config and VibeProxy will route them through your ChatGPT subscription automatically. Follow the updated [Factory setup](FACTORY_SETUP.md#step-3-configure-factory-cli) snippet.
 
 <p align="center">
 <br>
   <a href="https://www.loom.com/share/5cf54acfc55049afba725ab443dd3777"><img src="vibeproxy-factory-video.webp" width="600" height="380" alt="VibeProxy Screenshot" border="0"></a>
 </p>
 
+> [!NOTE]
+> 📣 **NEW: Auto-Updates! 🔄** VibeProxy now automatically checks for and downloads the latest CLIProxyAPI binary updates in the background. You'll always have support for the newest models without lifting a finger.
+>
+> 📣 **NEW: GPT-5.1 & GPT-5.1 Codex Support! ⚡️** Drop the brand-new `gpt-5.1*` and `gpt-5.1-codex*` models into your Factory CLI config and VibeProxy will route them through your ChatGPT subscription automatically. Follow the updated [Factory setup](FACTORY_SETUP.md#step-3-configure-factory-cli) snippet.
+>
+> 📣 **NEW: Extended Thinking Support! 🧠** VibeProxy now supports Claude's extended thinking feature with dynamic budgets (4K, 10K, 32K tokens). Use model names like `claude-sonnet-4-5-20250929-thinking-10000` to enable extended thinking. See the [Factory Setup Guide](FACTORY_SETUP.md#step-3-configure-factory-cli) for details.
+> 
+> 📣 **NEW: Gemini and Qwen Support! 🎉** VibeProxy now supports Google's Gemini AI and Qwen AI with full OAuth authentication. Connect your accounts and use Gemini and Qwen with your favorite AI coding tools!
+
+---
+
 > [!TIP]
 > Check out our [Factory Setup Guide](FACTORY_SETUP.md) for step-by-step instructions on how to use VibeProxy with Factory Droids.
 
+---
 
 ## Features
 
