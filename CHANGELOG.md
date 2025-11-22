@@ -5,6 +5,24 @@ All notable changes to VibeProxy will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-11-22
+
+### Updated
+- **CLIProxyAPI 6.5.7** - Latest upstream release with improvements and bug fixes
+  - Commit: 9d50a68, Built: 2025-11-22T13:36:45Z
+  - Various upstream improvements and stability enhancements
+
+### Fixed
+- **Auto-Update Workflow** - Improved file filtering to prevent unwanted files from CLIProxyAPI releases
+  - Now explicitly excludes: README.md, LICENSE, config.example.yaml, config.yaml, README_CN.md
+  - Prevents accidental overwriting of VibeProxy documentation files
+  - Added debug output to detect unexpected extracted files
+
+### Note
+- Switched to semantic versioning: Minor version bump (1.1.0) for CLIProxyAPI updates that may include new features
+- Future patch versions (1.1.x) will be for bug fixes only
+- Future minor versions (1.x.0) will include new features or significant updates
+
 ## [1.0.9] - 2025-11-22
 
 ### Added
