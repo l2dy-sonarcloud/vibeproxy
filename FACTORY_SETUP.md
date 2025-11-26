@@ -177,6 +177,13 @@ Edit your Factory configuration file at `~/.factory/config.json` (if the file do
       "provider": "openai"
     },
     {
+      "model_display_name": "GPT-5.1 Codex Max",
+      "model": "gpt-5.1-codex-max",
+      "base_url": "http://localhost:8317/v1",
+      "api_key": "dummy-not-used",
+      "provider": "openai"
+    },
+    {
       "model_display_name": "GPT-5.1",
       "model": "gpt-5.1",
       "base_url": "http://localhost:8317/v1",
@@ -324,6 +331,7 @@ Edit your Factory configuration file at `~/.factory/config.json` (if the file do
 - `gpt-5.1-minimal` / `low` / `medium` / `high` - GPT-5.1 with explicit reasoning effort controls
 - `gpt-5.1-codex` - Latest Codex upgrade (faster reasoning + better tool use)
 - `gpt-5.1-codex-low` / `medium` / `high` - Same model with explicit reasoning effort presets
+- `gpt-5.1-codex-max` - Codex Max optimized for long-horizon agentic coding tasks
 
 No manual CLIProxyAPI update is required—VibeProxy automatically keeps CLIProxyAPI up to date via our new auto-update workflow, so you can use new models immediately.
 
