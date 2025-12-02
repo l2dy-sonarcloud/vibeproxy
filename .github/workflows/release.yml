@@ -44,8 +44,10 @@ jobs:
         id: get_version
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
+          BUILD_NUMBER=$(git rev-list --count HEAD)
           echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
-          echo "Building version: ${VERSION}"
+          echo "BUILD_NUMBER=${BUILD_NUMBER}" >> $GITHUB_OUTPUT
+          echo "Building version: ${VERSION} (build ${BUILD_NUMBER})"
 
       - name: Build app bundle
         env:
@@ -167,6 +169,7 @@ jobs:
       - name: Update appcast.xml
         env:
           VERSION: ${{ steps.get_version.outputs.VERSION }}
+          BUILD_NUMBER: ${{ steps.get_version.outputs.BUILD_NUMBER }}
           ED_SIGNATURE: ${{ steps.sparkle_sign.outputs.ed_signature }}
           LENGTH: ${{ steps.sparkle_sign.outputs.length }}
         run: |
@@ -176,7 +179,7 @@ jobs:
           cat > /tmp/new_item.xml << ENDOFITEM
               <item>
                 <title>Version ${VERSION}</title>
-                <sparkle:version>${VERSION}</sparkle:version>
+                <sparkle:version>${BUILD_NUMBER}</sparkle:version>
                 <sparkle:shortVersionString>${VERSION}</sparkle:shortVersionString>
                 <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
                 <pubDate>${TODAY}</pubDate>

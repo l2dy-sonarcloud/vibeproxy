@@ -29,7 +29,7 @@
     <key>NSHumanReadableCopyright</key>
     <string>Copyright © 2025 Automaze, Ltd. All rights reserved.</string>
     <key>SUFeedURL</key>
-    <string>https://raw.githubusercontent.com/automazeio/vibeproxy/refs/heads/main/appcast.xml</string>
+    <string>https://raw.githubusercontent.com/automazeio/vibeproxy/main/appcast.xml</string>
     <key>SUScheduledCheckInterval</key>
     <integer>86400</integer>
     <key>SUAutomaticallyUpdate</key>
