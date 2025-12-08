@@ -251,23 +251,23 @@ struct SettingsView: View {
                     )
                     
                     ServiceRow(
-                        serviceType: .copilot,
-                        iconName: "icon-copilot.png",
-                        accounts: authManager.accounts(for: .copilot),
-                        isAuthenticating: authenticatingService == .copilot,
-                        helpText: "GitHub Copilot provides access to Claude, GPT, Gemini and other models via your Copilot subscription.",
-                        onConnect: { connectService(.copilot) },
-                        onDisconnect: { account in disconnectAccount(account) },
-                        onExpandChange: { expanded in expandedRowCount += expanded ? 1 : -1 }
-                    )
-                    
-                    ServiceRow(
                         serviceType: .gemini,
                         iconName: "icon-gemini.png",
                         accounts: authManager.accounts(for: .gemini),
                         isAuthenticating: authenticatingService == .gemini,
                         helpText: "⚠️ Note: If you're an existing Gemini user with multiple projects, authentication will use your default project. Set your desired project as default in Google AI Studio before connecting.",
                         onConnect: { connectService(.gemini) },
+                        onDisconnect: { account in disconnectAccount(account) },
+                        onExpandChange: { expanded in expandedRowCount += expanded ? 1 : -1 }
+                    )
+                    
+                    ServiceRow(
+                        serviceType: .copilot,
+                        iconName: "icon-copilot.png",
+                        accounts: authManager.accounts(for: .copilot),
+                        isAuthenticating: authenticatingService == .copilot,
+                        helpText: "GitHub Copilot provides access to Claude, GPT, Gemini and other models via your Copilot subscription.",
+                        onConnect: { connectService(.copilot) },
                         onDisconnect: { account in disconnectAccount(account) },
                         onExpandChange: { expanded in expandedRowCount += expanded ? 1 : -1 }
                     )
