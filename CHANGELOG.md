@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Switched from CLIProxyAPI to CLIProxyAPIPlus for third-party provider support
 - Device code now copied with hyphen for easier GitHub authentication
 
+### Updated
+- **CLIProxyAPIPlus 6.5.55** - Latest upstream release
+
 
 ## [1.7.0] - 2025-12-08
 
