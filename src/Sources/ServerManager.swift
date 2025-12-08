@@ -86,9 +86,9 @@ class ServerManager {
             return
         }
         
-        let bundledPath = (resourcePath as NSString).appendingPathComponent("cli-proxy-api")
+        let bundledPath = (resourcePath as NSString).appendingPathComponent("cli-proxy-api-plus")
         guard FileManager.default.fileExists(atPath: bundledPath) else {
-            addLog("❌ Error: cli-proxy-api binary not found at \(bundledPath)")
+            addLog("❌ Error: cli-proxy-api-plus binary not found at \(bundledPath)")
             completion(false)
             return
         }
@@ -208,7 +208,7 @@ class ServerManager {
             return
         }
         
-        let bundledPath = (resourcePath as NSString).appendingPathComponent("cli-proxy-api")
+        let bundledPath = (resourcePath as NSString).appendingPathComponent("cli-proxy-api-plus")
         guard FileManager.default.fileExists(atPath: bundledPath) else {
             completion(false, "Binary not found at \(bundledPath)")
             return
@@ -228,7 +228,7 @@ class ServerManager {
         case .codexLogin:
             authProcess.arguments = ["--config", configPath, "-codex-login"]
         case .copilotLogin:
-            authProcess.arguments = ["--config", configPath, "-copilot-login"]
+            authProcess.arguments = ["--config", configPath, "-github-copilot-login"]
         case .geminiLogin:
             authProcess.arguments = ["--config", configPath, "-login"]
         case .qwenLogin(let email):
@@ -323,28 +323,26 @@ class ServerManager {
                     
                     // For Copilot, try to extract the device code from output
                     if case .copilotLogin = command {
-                        // Extract code from output like "enter code: XXXX-XXXX"
-                        if let codeRange = capture.text.range(of: "enter code: "),
+                        // Extract code from output like "enter the code: XXXX-XXXX"
+                        if let codeRange = capture.text.range(of: "enter the code: "),
                            let endRange = capture.text[codeRange.upperBound...].range(of: "\n") {
                             let code = String(capture.text[codeRange.upperBound..<endRange.lowerBound]).trimmingCharacters(in: .whitespaces)
-                            // Copy code without dash to clipboard
-                            let codeWithoutDash = code.replacingOccurrences(of: "-", with: "")
+                            // Copy code to clipboard
                             NSPasteboard.general.clearContents()
-                            NSPasteboard.general.setString(codeWithoutDash, forType: .string)
+                            NSPasteboard.general.setString(code, forType: .string)
                             completion(true, "🌐 Browser opened for GitHub authentication.\n\n📋 Code copied to clipboard:\n\n\(code)\n\nJust paste it in the browser!\n\nThe app will automatically detect when you're authenticated.")
                             return
-                        } else if capture.text.contains("enter code:") {
+                        } else if capture.text.contains("enter the code:") {
                             // Try simpler extraction
                             let lines = capture.text.components(separatedBy: "\n")
                             for line in lines {
-                                if line.contains("enter code:") {
-                                    let parts = line.components(separatedBy: "enter code:")
+                                if line.contains("enter the code:") {
+                                    let parts = line.components(separatedBy: "enter the code:")
                                     if parts.count > 1 {
                                         let code = parts[1].trimmingCharacters(in: .whitespacesAndNewlines)
-                                        // Copy code without dash to clipboard
-                                        let codeWithoutDash = code.replacingOccurrences(of: "-", with: "")
+                                        // Copy code to clipboard
                                         NSPasteboard.general.clearContents()
-                                        NSPasteboard.general.setString(codeWithoutDash, forType: .string)
+                                        NSPasteboard.general.setString(code, forType: .string)
                                         completion(true, "🌐 Browser opened for GitHub authentication.\n\n📋 Code copied to clipboard:\n\n\(code)\n\nJust paste it in the browser!\n\nThe app will automatically detect when you're authenticated.")
                                         return
                                     }
@@ -402,12 +400,12 @@ class ServerManager {
         return logBuffer.elements()
     }
     
-    /// Kill any orphaned cli-proxy-api processes that might be running
+    /// Kill any orphaned cli-proxy-api-plus processes that might be running
     private func killOrphanedProcesses() {
         // First check if any processes exist using pgrep
         let checkTask = Process()
         checkTask.executableURL = URL(fileURLWithPath: "/usr/bin/pgrep")
-        checkTask.arguments = ["-f", "cli-proxy-api"]
+        checkTask.arguments = ["-f", "cli-proxy-api-plus"]
         
         let outputPipe = Pipe()
         checkTask.standardOutput = outputPipe
@@ -429,7 +427,7 @@ class ServerManager {
                     // Now kill them
                     let killTask = Process()
                     killTask.executableURL = URL(fileURLWithPath: "/usr/bin/pkill")
-                    killTask.arguments = ["-9", "-f", "cli-proxy-api"]
+                    killTask.arguments = ["-9", "-f", "cli-proxy-api-plus"]
                     
                     try killTask.run()
                     killTask.waitUntilExit()

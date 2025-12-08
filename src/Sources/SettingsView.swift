@@ -250,17 +250,16 @@ struct SettingsView: View {
                         onExpandChange: { expanded in expandedRowCount += expanded ? 1 : -1 }
                     )
                     
-                    // TODO: Enable when CLIProxyAPI PR #430 is merged
-                    // ServiceRow(
-                    //     serviceType: .copilot,
-                    //     iconName: "icon-copilot.png",
-                    //     accounts: authManager.accounts(for: .copilot),
-                    //     isAuthenticating: authenticatingService == .copilot,
-                    //     helpText: "GitHub Copilot provides access to Claude, GPT, Gemini and other models via your Copilot subscription.",
-                    //     onConnect: { connectService(.copilot) },
-                    //     onDisconnect: { account in disconnectAccount(account) },
-                    //     onExpandChange: { expanded in expandedRowCount += expanded ? 1 : -1 }
-                    // )
+                    ServiceRow(
+                        serviceType: .copilot,
+                        iconName: "icon-copilot.png",
+                        accounts: authManager.accounts(for: .copilot),
+                        isAuthenticating: authenticatingService == .copilot,
+                        helpText: "GitHub Copilot provides access to Claude, GPT, Gemini and other models via your Copilot subscription.",
+                        onConnect: { connectService(.copilot) },
+                        onDisconnect: { account in disconnectAccount(account) },
+                        onExpandChange: { expanded in expandedRowCount += expanded ? 1 : -1 }
+                    )
                     
                     ServiceRow(
                         serviceType: .gemini,
@@ -337,7 +336,7 @@ struct SettingsView: View {
             }
             .padding(.bottom, 12)
         }
-        .frame(width: 480, height: 610)
+        .frame(width: 480, height: 680)
         .sheet(isPresented: $showingQwenEmailPrompt) {
             VStack(spacing: 16) {
                 Text("Qwen Account Email")

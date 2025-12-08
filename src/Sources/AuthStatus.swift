@@ -3,7 +3,7 @@ import Foundation
 enum ServiceType: String, CaseIterable {
     case claude
     case codex
-    case copilot
+    case copilot = "github-copilot"
     case gemini
     case qwen
     case antigravity

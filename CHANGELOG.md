@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [1.8.0] - 2025-12-08
+
+### Added
+- **GitHub Copilot Support** - Connect your GitHub Copilot subscription for access to Claude, GPT, Gemini and other models
+
+### Changed
+- Switched from CLIProxyAPI to CLIProxyAPIPlus for third-party provider support
+- Device code now copied with hyphen for easier GitHub authentication
+
+
 ## [1.7.0] - 2025-12-08
 
 ### Added

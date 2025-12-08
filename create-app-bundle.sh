@@ -63,13 +63,13 @@ fi
 echo "Checking bundled resources:"
 ls -lh "$APP_DIR/Contents/Resources/"
 
-if [ ! -f "$APP_DIR/Contents/Resources/cli-proxy-api" ]; then
-    echo -e "${YELLOW}⚠️ WARNING: cli-proxy-api binary not found in bundle!${NC}"
-    echo "Looking for cli-proxy-api in source:"
-    find "$SRC_DIR/Sources/Resources" -name "cli-proxy-api" -ls
+if [ ! -f "$APP_DIR/Contents/Resources/cli-proxy-api-plus" ]; then
+    echo -e "${YELLOW}⚠️ WARNING: cli-proxy-api-plus binary not found in bundle!${NC}"
+    echo "Looking for cli-proxy-api-plus in source:"
+    find "$SRC_DIR/Sources/Resources" -name "cli-proxy-api-plus" -ls
     exit 1
 fi
-echo -e "${GREEN}✅ cli-proxy-api bundled: $(ls -lh "$APP_DIR/Contents/Resources/cli-proxy-api" | awk '{print $5}')${NC}"
+echo -e "${GREEN}✅ cli-proxy-api-plus bundled: $(ls -lh "$APP_DIR/Contents/Resources/cli-proxy-api-plus" | awk '{print $5}')${NC}"
 
 # Copy app icon
 if [ -f "$SRC_DIR/Sources/Resources/AppIcon.icns" ]; then
@@ -129,19 +129,19 @@ if [ -n "$CODESIGN_IDENTITY" ]; then
     # Remove any existing signatures first
     codesign --remove-signature "$APP_DIR/Contents/MacOS/CLIProxyMenuBar" 2>/dev/null || true
     
-    # Sign the cli-proxy-api binary (required for notarization)
-    if [ -f "$APP_DIR/Contents/Resources/cli-proxy-api" ]; then
-        echo -e "${BLUE}Signing cli-proxy-api binary...${NC}"
+    # Sign the cli-proxy-api-plus binary (required for notarization)
+    if [ -f "$APP_DIR/Contents/Resources/cli-proxy-api-plus" ]; then
+        echo -e "${BLUE}Signing cli-proxy-api-plus binary...${NC}"
         # Use entitlements for the bundled binary
         if [ -f "$PROJECT_DIR/entitlements.plist" ]; then
             codesign --force --sign "$CODESIGN_IDENTITY" --options runtime --timestamp \
                 --entitlements "$PROJECT_DIR/entitlements.plist" \
-                "$APP_DIR/Contents/Resources/cli-proxy-api"
+                "$APP_DIR/Contents/Resources/cli-proxy-api-plus"
         else
             codesign --force --sign "$CODESIGN_IDENTITY" --options runtime --timestamp \
-                "$APP_DIR/Contents/Resources/cli-proxy-api"
+                "$APP_DIR/Contents/Resources/cli-proxy-api-plus"
         fi
-        echo -e "${GREEN}✅ cli-proxy-api signed${NC}"
+        echo -e "${GREEN}✅ cli-proxy-api-plus signed${NC}"
     fi
     
     # Sign Sparkle.framework (required for notarization)
