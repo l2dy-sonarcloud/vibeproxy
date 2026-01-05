@@ -265,8 +265,8 @@ class ThinkingProxy {
             return nil
         }
         
-        // Only process Claude models with thinking suffix
-        guard model.starts(with: "claude-") else {
+        // Only process Claude models (including gemini-claude variants)
+        guard model.starts(with: "claude-") || model.starts(with: "gemini-claude-") else {
             return (jsonString, false)  // Not Claude, pass through
         }
         
@@ -339,6 +339,11 @@ class ThinkingProxy {
                let modifiedString = String(data: modifiedData, encoding: .utf8) {
                 return (modifiedString, true)
             }
+        } else if model.contains("thinking") {
+            // Model contains "thinking" but no explicit budget suffix (e.g. gemini-claude-opus-4-5-thinking)
+            // We should still enable the beta header, but we won't modify the body (assume backend defaults or user handled it)
+            NSLog("[ThinkingProxy] Detected thinking model '\(model)' without budget suffix - enabling beta header")
+            return (jsonString, true)
         }
         
         return (jsonString, false)  // No transformation needed
