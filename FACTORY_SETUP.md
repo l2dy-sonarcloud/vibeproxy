@@ -121,6 +121,28 @@ Edit your Factory configuration file at `~/.factory/config.json` (if the file do
     },
 
     {
+      "model_display_name": "AG: Opus 4.5 Thinking",
+      "model": "gemini-claude-opus-4-5-thinking",
+      "base_url": "http://localhost:8317/v1",
+      "api_key": "dummy-not-used",
+      "provider": "openai"
+    },
+    {
+      "model_display_name": "AG: Sonnet 4.5 Thinking",
+      "model": "gemini-claude-sonnet-4-5-thinking",
+      "base_url": "http://localhost:8317/v1",
+      "api_key": "dummy-not-used",
+      "provider": "openai"
+    },
+    {
+      "model_display_name": "AG: Sonnet 4.5",
+      "model": "gemini-claude-sonnet-4-5",
+      "base_url": "http://localhost:8317/v1",
+      "api_key": "dummy-not-used",
+      "provider": "openai"
+    },
+
+    {
       "model_display_name": "GPT-5.1 Codex",
       "model": "gpt-5.1-codex",
       "base_url": "http://localhost:8317/v1",
@@ -276,6 +298,18 @@ Edit your Factory configuration file at `~/.factory/config.json` (if the file do
     - `*-thinking-32000` - "Ultra think" mode (~32K tokens)
 
 ### Gemini Models
+
+### Claude Models via Antigravity
+
+Antigravity provides access to Claude models with a generous usage quota (shared with Sonnet and GPT-OSS). These models are accessed via the OpenAI-compatible API format and require **Antigravity** authentication.
+
+**Available Models:**
+- `gemini-claude-opus-4-5-thinking` - Claude Opus 4.5 with extended thinking (backend-controlled budget)
+- `gemini-claude-sonnet-4-5-thinking` - Claude Sonnet 4.5 with extended thinking (backend-controlled budget)
+- `gemini-claude-sonnet-4-5` - Claude Sonnet 4.5 (no thinking)
+
+> [!TIP]
+> See the [Step 3 configuration example](#step-3-configure-factory-cli) above for the full Factory CLI config including these models.
 
 **Gemini 3 Pro** (via Antigravity - requires Antigravity authentication):
 - `gemini-3-pro-preview` - Gemini 3 Pro (Latest preview model)

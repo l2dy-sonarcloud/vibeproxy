@@ -265,8 +265,8 @@ class ThinkingProxy {
             return nil
         }
         
-        // Only process Claude models with thinking suffix
-        guard model.starts(with: "claude-") else {
+        // Only process Claude models (including gemini-claude variants)
+        guard model.starts(with: "claude-") || model.starts(with: "gemini-claude-") else {
             return (jsonString, false)  // Not Claude, pass through
         }
         
@@ -278,8 +278,16 @@ class ThinkingProxy {
             // Extract the number after "-thinking-"
             let budgetString = String(model[thinkingRange.upperBound...])
             
-            // Strip the thinking suffix from model name regardless
-            let cleanModel = String(model[..<thinkingRange.lowerBound])
+            // For gemini-claude-* models, preserve "-thinking" and only strip the number
+            // e.g. gemini-claude-opus-4-5-thinking-10000 -> gemini-claude-opus-4-5-thinking
+            // For claude-* models, strip the entire suffix
+            // e.g. claude-opus-4-5-20251101-thinking-10000 -> claude-opus-4-5-20251101
+            let cleanModel: String
+            if model.starts(with: "gemini-claude-") {
+                cleanModel = String(model[..<thinkingRange.upperBound].dropLast(1))  // Keep "-thinking", drop trailing "-"
+            } else {
+                cleanModel = String(model[..<thinkingRange.lowerBound])
+            }
             json["model"] = cleanModel
             
             // Only add thinking parameter if it's a valid integer
@@ -339,6 +347,11 @@ class ThinkingProxy {
                let modifiedString = String(data: modifiedData, encoding: .utf8) {
                 return (modifiedString, true)
             }
+        } else if model.contains("thinking") {
+            // Model contains "thinking" but no explicit budget suffix (e.g. gemini-claude-opus-4-5-thinking)
+            // We should still enable the beta header, but we won't modify the body (assume backend defaults or user handled it)
+            NSLog("[ThinkingProxy] Detected thinking model '\(model)' without budget suffix - enabling beta header")
+            return (jsonString, true)
         }
         
         return (jsonString, false)  // No transformation needed
